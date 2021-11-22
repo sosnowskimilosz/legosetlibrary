@@ -9,5 +9,4 @@ public class LegoSetLibraryApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LegoSetLibraryApplication.class, args);
 	}
-
 }
