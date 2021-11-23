@@ -15,18 +15,15 @@ public class LegoSet {
     String catalogNumber;
     LegoSetStatus status;
     LocalDate purchasingDate;
-    String category;
+    LegoCategory category;
     Integer numberOfPieces;
-    Integer numberOfMinifigures;
     BigDecimal price;
 
-    public LegoSet(String catalogNumber, LegoSetStatus status, LocalDate purchasingDate, String category, Integer numberOfPieces, Integer numberOfMinifigures, BigDecimal price) {
+    public LegoSet(String catalogNumber, LegoCategory category, Integer numberOfPieces, BigDecimal price) {
         this.catalogNumber = catalogNumber;
-        this.status = status;
-        this.purchasingDate = purchasingDate;
+        this.status = LegoSetStatus.ON_DREAM_LIST;
         this.category = category;
         this.numberOfPieces = numberOfPieces;
-        this.numberOfMinifigures = numberOfMinifigures;
         this.price = price;
     }
 }
