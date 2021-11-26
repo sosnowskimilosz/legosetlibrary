@@ -19,7 +19,7 @@ public interface LegoSetUseCase {
 
     Optional<LegoSet> findById(Long id);
 
-    Optional<LegoSet> findByCatalogNumbe(String number);
+    Optional<LegoSet> findByCatalogNumber(String number);
 
     List<LegoSet> findByStatus(LegoSetStatus status);
 
@@ -36,12 +36,13 @@ public interface LegoSetUseCase {
     @Value
     class CreateLegoSetCommand {
         String catalogNumber;
+        String title;
         LegoCategory category;
         Integer numberOfPieces;
         BigDecimal price;
 
         public LegoSet toLegoSet() {
-            return new LegoSet(catalogNumber, category, numberOfPieces, price);
+            return new LegoSet(catalogNumber, title, category, numberOfPieces, price);
         }
     }
 
@@ -59,6 +60,7 @@ public interface LegoSetUseCase {
     class UpdateLegoSetCommand {
         Long id;
         String catalogNumber;
+        String title;
         LegoSetStatus status;
         LocalDate purchasingDate;
         LegoCategory category;
@@ -68,6 +70,9 @@ public interface LegoSetUseCase {
         public LegoSet updateFields(LegoSet legoSet) {
             if (catalogNumber != null) {
                 legoSet.setCatalogNumber(catalogNumber);
+            }
+            if (title != null) {
+                legoSet.setTitle(title);
             }
             if (status != null) {
                 legoSet.setStatus(status);

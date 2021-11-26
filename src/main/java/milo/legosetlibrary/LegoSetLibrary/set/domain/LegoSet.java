@@ -13,14 +13,16 @@ import java.time.LocalDate;
 public class LegoSet {
     Long id;
     String catalogNumber;
+    String title;
     LegoSetStatus status;
     LocalDate purchasingDate;
     LegoCategory category;
     Integer numberOfPieces;
     BigDecimal price;
 
-    public LegoSet(String catalogNumber, LegoCategory category, Integer numberOfPieces, BigDecimal price) {
+    public LegoSet(String catalogNumber, String title, LegoCategory category, Integer numberOfPieces, BigDecimal price) {
         this.catalogNumber = catalogNumber;
+        this.title = title;
         this.status = LegoSetStatus.ON_DREAM_LIST;
         this.category = category;
         this.numberOfPieces = numberOfPieces;

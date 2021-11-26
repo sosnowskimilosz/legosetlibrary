@@ -31,10 +31,10 @@ public class LegoSetService implements LegoSetUseCase {
     }
 
     @Override
-    public Optional<LegoSet> findByCatalogNumbe(String number) {
+    public Optional<LegoSet> findByCatalogNumber(String number) {
         return repository.findAll()
                 .stream()
-                .filter(legoSet -> legoSet.getCatalogNumber().equals(number))
+                .filter(legoSet -> legoSet.getCatalogNumber().startsWith(number))
                 .findFirst();
     }
 
@@ -85,9 +85,10 @@ public class LegoSetService implements LegoSetUseCase {
                         legoSet.setPurchasingDate(LocalDate.now());
                         repository.save(legoSet);
                         return UpdateLegoSetResponse.SUCCESS;
-                    }else{
+                    } else {
                         return new UpdateLegoSetResponse(false, Collections.singletonList("Set with id=" + id + " is purchased"));
-                    }}).orElseGet(()-> new UpdateLegoSetResponse(false, Collections.singletonList("Set with id=" + id + " is not found")));
+                    }
+                }).orElseGet(() -> new UpdateLegoSetResponse(false, Collections.singletonList("Set with id=" + id + " is not found")));
 
     }
 }
