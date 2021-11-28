@@ -6,6 +6,7 @@ import lombok.Value;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoCategory;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSet;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSetStatus;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -37,6 +38,8 @@ public interface LegoSetUseCase {
     class CreateLegoSetCommand {
         String catalogNumber;
         String title;
+        LegoSetStatus status;
+        LocalDate purchasingDate;
         LegoCategory category;
         Integer numberOfPieces;
         BigDecimal price;
@@ -92,5 +95,4 @@ public interface LegoSetUseCase {
             return legoSet;
         }
     }
-
 }

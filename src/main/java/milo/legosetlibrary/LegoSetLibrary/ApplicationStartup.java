@@ -3,10 +3,12 @@ package milo.legosetlibrary.LegoSetLibrary;
 import lombok.AllArgsConstructor;
 import milo.legosetlibrary.LegoSetLibrary.set.application.port.LegoSetUseCase;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoCategory;
+import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSetStatus;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import static milo.legosetlibrary.LegoSetLibrary.set.application.port.LegoSetUseCase.*;
 
@@ -27,9 +29,9 @@ public class ApplicationStartup implements CommandLineRunner {
     }
 
     private void initData() {
-        service.addLegoSet(new CreateLegoSetCommand("60215", "Fire brigade", LegoCategory.DISNEY, 230, BigDecimal.valueOf(239)));
-        service.addLegoSet(new CreateLegoSetCommand("60264", "Ocean submarine", LegoCategory.CITY, 123, BigDecimal.valueOf(120)));
-        service.addLegoSet(new CreateLegoSetCommand("75257", "Star Wars - Millenium", LegoCategory.STAR_WARS, 1351, BigDecimal.valueOf(700)));
+        service.addLegoSet(new CreateLegoSetCommand("60215", "Fire brigade", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.DISNEY, 230, BigDecimal.valueOf(239)));
+        service.addLegoSet(new CreateLegoSetCommand("60264", "Ocean submarine", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.CITY, 123, BigDecimal.valueOf(120)));
+        service.addLegoSet(new CreateLegoSetCommand("75257", "Star Wars - Millenium", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.STAR_WARS, 1351, BigDecimal.valueOf(700)));
     }
 
     private void printAll() {
@@ -52,6 +54,8 @@ public class ApplicationStartup implements CommandLineRunner {
                     UpdateLegoSetCommand command = UpdateLegoSetCommand
                             .builder()
                             .id(legoSet.getId())
+                            .status(LegoSetStatus.PURCHASED)
+                            .purchasingDate(LocalDate.of(2021,12,24))
                             .category(LegoCategory.CITY)
                             .numberOfPieces(250)
                             .build();

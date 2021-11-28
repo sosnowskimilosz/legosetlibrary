@@ -89,6 +89,5 @@ public class LegoSetService implements LegoSetUseCase {
                         return new UpdateLegoSetResponse(false, Collections.singletonList("Set with id=" + id + " is purchased"));
                     }
                 }).orElseGet(() -> new UpdateLegoSetResponse(false, Collections.singletonList("Set with id=" + id + " is not found")));
-
     }
 }
