@@ -106,9 +106,9 @@ public class LegoSetController {
         LocalDate purchasingDate;
         @NotNull(message = "LegoSet should have status")
         LegoCategory category;
-        @Min(0)
+        @Min(value = 1, message = "Number of pieces should be more than 0")
         Integer numberOfPieces;
-        @DecimalMin("0.00")
+        @DecimalMin(value = "0.01", message = "Price should be more than 0,00")
         BigDecimal price;
 
         CreateLegoSetCommand toCreateCommand() {
