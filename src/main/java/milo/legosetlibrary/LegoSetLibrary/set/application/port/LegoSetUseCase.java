@@ -34,6 +34,16 @@ public interface LegoSetUseCase {
 
     UpdateLegoSetResponse changeStatusToPurchased(Long id);
 
+    void updateBoxCover(UpdateBoxCoverCommand command);
+
+    @Value
+    class UpdateBoxCoverCommand {
+        Long id;
+        byte[] file;
+        String contentType;
+        String filename;
+    }
+
     @Value
     class CreateLegoSetCommand {
         String catalogNumber;

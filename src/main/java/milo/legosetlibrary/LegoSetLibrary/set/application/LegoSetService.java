@@ -90,4 +90,14 @@ public class LegoSetService implements LegoSetUseCase {
                     }
                 }).orElseGet(() -> new UpdateLegoSetResponse(false, Collections.singletonList("Set with id=" + id + " is not found")));
     }
+
+    @Override
+    public void updateBoxCover(UpdateBoxCoverCommand command) {
+        int length = command.getFile().length;
+        System.out.println("Receive cover command: " + command.getFilename() + " bytes: " + length);
+        repository.findById(command.getId())
+                .ifPresent(book -> {
+//                    book.setCoverOfBoxId();
+                });
+    }
 }
