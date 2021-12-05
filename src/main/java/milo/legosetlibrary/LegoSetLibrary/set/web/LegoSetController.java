@@ -8,6 +8,7 @@ import milo.legosetlibrary.LegoSetLibrary.set.application.port.LegoSetUseCase.Up
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoCategory;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSet;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSetStatus;
+import milo.legosetlibrary.LegoSetLibrary.web.CreatedURI;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -67,8 +69,13 @@ public class LegoSetController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public LegoSet addLegoSet(@Valid @RequestBody RestLegoSetCommand command) {
-        return service.addLegoSet(command.toCreateCommand());
+    public ResponseEntity<Void> addLegoSet(@Valid @RequestBody RestLegoSetCommand command) {
+        LegoSet legoSet = service.addLegoSet(command.toCreateCommand());
+        return ResponseEntity.created(createdLegoSetUri(legoSet)).build();
+    }
+
+    private URI createdLegoSetUri(LegoSet legoSet) {
+        return new CreatedURI("/" + legoSet.getId().toString()).uri();
     }
 
     @DeleteMapping("/{id}")
