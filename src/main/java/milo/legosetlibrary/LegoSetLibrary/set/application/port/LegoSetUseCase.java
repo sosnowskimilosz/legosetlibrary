@@ -36,6 +36,8 @@ public interface LegoSetUseCase {
 
     void updateBoxCover(UpdateBoxCoverCommand command);
 
+    void removeBoxCover(Long id);
+
     @Value
     class UpdateBoxCoverCommand {
         Long id;

@@ -6,6 +6,9 @@ import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoCategory;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSet;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSetRepository;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSetStatus;
+import milo.legosetlibrary.LegoSetLibrary.uploads.application.port.UploadUseCase;
+import milo.legosetlibrary.LegoSetLibrary.uploads.application.port.UploadUseCase.SaveUploadCommand;
+import milo.legosetlibrary.LegoSetLibrary.uploads.domain.Upload;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 public class LegoSetService implements LegoSetUseCase {
 
     private final LegoSetRepository repository;
+    private final UploadUseCase upload;
 
     @Override
     public List<LegoSet> findAll() {
@@ -96,8 +100,22 @@ public class LegoSetService implements LegoSetUseCase {
         int length = command.getFile().length;
         System.out.println("Receive cover command: " + command.getFilename() + " bytes: " + length);
         repository.findById(command.getId())
-                .ifPresent(book -> {
-//                    book.setCoverOfBoxId();
+                .ifPresent(legoSet -> {
+                    Upload savedUpload = upload.save(new SaveUploadCommand(command.getFilename(), command.getFile(), command.getContentType()));
+                    legoSet.setCoverOfBoxId(savedUpload.getId());
+                    repository.save(legoSet);
+                });
+    }
+
+    @Override
+    public void removeBoxCover(Long id) {
+        repository.findById(id)
+                .ifPresent(legoSet -> {
+                    if (legoSet.getCoverOfBoxId() != null) {
+                        upload.removeById(legoSet.getCoverOfBoxId());
+                        legoSet.setCoverOfBoxId(null);
+                        repository.save(legoSet);
+                    }
                 });
     }
 }
