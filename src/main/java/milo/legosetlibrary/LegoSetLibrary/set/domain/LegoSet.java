@@ -19,7 +19,7 @@ public class LegoSet {
     LegoCategory category;
     Integer numberOfPieces;
     BigDecimal price;
-    String coverOfBoxId;
+    Long coverOfBoxId;
 
     public LegoSet(String catalogNumber, String title, LegoCategory category, Integer numberOfPieces, BigDecimal price) {
         this.catalogNumber = catalogNumber;

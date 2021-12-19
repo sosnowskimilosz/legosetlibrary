@@ -101,7 +101,7 @@ public class LegoSetService implements LegoSetUseCase {
         System.out.println("Receive cover command: " + command.getFilename() + " bytes: " + length);
         repository.findById(command.getId())
                 .ifPresent(legoSet -> {
-                    Upload savedUpload = upload.save(new SaveUploadCommand(command.getFilename(), command.getFile(), command.getContentType()));
+                    Upload savedUpload = upload.save(new SaveUploadCommand(command.getFilename(), command.getContentType(), command.getFile()));
                     legoSet.setCoverOfBoxId(savedUpload.getId());
                     repository.save(legoSet);
                 });
