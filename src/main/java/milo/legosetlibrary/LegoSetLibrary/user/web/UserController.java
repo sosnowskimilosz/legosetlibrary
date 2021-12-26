@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
@@ -70,13 +71,13 @@ public class UserController {
     private static class RestUserCommand {
         @NotBlank
         private String login;
-//        Set<Long> legoSets;
+        Set<Long> legoSets;
 
         CreateUserCommand toCreateUserCommand() {
-            return new CreateUserCommand(login);
+            return new CreateUserCommand(login, legoSets);
         }
         UpdateUserCommand toUpdateUserCommand(Long id) {
-            return new UpdateUserCommand(id, login);
+            return new UpdateUserCommand(id, login, legoSets);
         }
     }
 }

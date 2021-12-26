@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static java.util.Collections.emptyList;
 
@@ -55,10 +56,8 @@ public interface LegoSetUseCase {
         LegoCategory category;
         Integer numberOfPieces;
         BigDecimal price;
+        Set<Long> users;
 
-        public LegoSet toLegoSet() {
-            return new LegoSet(catalogNumber, title, category, numberOfPieces, price);
-        }
     }
 
     @Value
@@ -81,30 +80,8 @@ public interface LegoSetUseCase {
         LegoCategory category;
         Integer numberOfPieces;
         BigDecimal price;
+        Set<Long> users;
 
-        public LegoSet updateFields(LegoSet legoSet) {
-            if (catalogNumber != null) {
-                legoSet.setCatalogNumber(catalogNumber);
-            }
-            if (title != null) {
-                legoSet.setTitle(title);
-            }
-            if (status != null) {
-                legoSet.setStatus(status);
-            }
-            if (purchasingDate != null) {
-                legoSet.setPurchasingDate(purchasingDate);
-            }
-            if (category != null) {
-                legoSet.setCategory(category);
-            }
-            if (numberOfPieces != null) {
-                legoSet.setNumberOfPieces(numberOfPieces);
-            }
-            if (price != null) {
-                legoSet.setPrice(price);
-            }
-            return legoSet;
-        }
+
     }
 }

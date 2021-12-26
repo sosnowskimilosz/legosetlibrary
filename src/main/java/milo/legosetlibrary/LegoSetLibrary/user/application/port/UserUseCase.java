@@ -5,6 +5,7 @@ import milo.legosetlibrary.LegoSetLibrary.user.domain.User;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface UserUseCase {
 
@@ -21,14 +22,14 @@ public interface UserUseCase {
     @Value
     class CreateUserCommand {
         String login;
-        //Set<Long> legoSets;
+        Set<Long> legoSets;
     }
 
     @Value
     class UpdateUserCommand {
         Long id;
         String login;
-        //Set<Long> legoSets;
+        Set<Long> legoSets;
     }
 
     @Value

@@ -16,15 +16,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static milo.legosetlibrary.LegoSetLibrary.set.application.port.LegoSetUseCase.*;
 
@@ -131,13 +130,15 @@ public class LegoSetController {
         Integer numberOfPieces;
         @DecimalMin(value = "0.00", message = "Price should be more than 0,00")
         BigDecimal price;
+        @NotEmpty
+        Set<Long> users = new HashSet<>();
 
         CreateLegoSetCommand toCreateCommand() {
-            return new CreateLegoSetCommand(catalogNumber, title, status, purchasingDate, category, numberOfPieces, price);
+            return new CreateLegoSetCommand(catalogNumber, title, status, purchasingDate, category, numberOfPieces, price, users);
         }
 
         UpdateLegoSetCommand toUpdateCommand(Long id) {
-            return new UpdateLegoSetCommand(id, catalogNumber, title, status, purchasingDate, category, numberOfPieces, price);
+            return new UpdateLegoSetCommand(id, catalogNumber, title, status, purchasingDate, category, numberOfPieces, price, users);
         }
     }
 }

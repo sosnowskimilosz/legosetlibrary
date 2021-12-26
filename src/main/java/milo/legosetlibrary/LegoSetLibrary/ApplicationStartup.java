@@ -3,14 +3,17 @@ package milo.legosetlibrary.LegoSetLibrary;
 import lombok.AllArgsConstructor;
 import milo.legosetlibrary.LegoSetLibrary.set.application.port.LegoSetUseCase;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoCategory;
+import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSet;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSetStatus;
 import milo.legosetlibrary.LegoSetLibrary.user.application.port.UserUseCase;
 import milo.legosetlibrary.LegoSetLibrary.user.db.UserJpaRepository;
+import milo.legosetlibrary.LegoSetLibrary.user.domain.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 import static milo.legosetlibrary.LegoSetLibrary.set.application.port.LegoSetUseCase.*;
 
@@ -20,24 +23,29 @@ public class ApplicationStartup implements CommandLineRunner {
 
     private final LegoSetUseCase legoSetService;
     private final UserUseCase userService;
-    private final UserJpaRepository userRepository;
-
 
     @Override
     public void run(String... args) {
         initData();
         printAllLegoSet();
-        printWithId(1L);
+//        printWithId(1L);
         updateLegoSetWithCatalogNumber("60215");
         changeStatusOfLegoSetToPurchased(2L);
         printAllLegoSet();
-        initSomeUsers();
     }
 
     private void initData() {
-        legoSetService.addLegoSet(new CreateLegoSetCommand("60215", "Fire brigade", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.DISNEY, 230, BigDecimal.valueOf(239)));
-        legoSetService.addLegoSet(new CreateLegoSetCommand("60264", "Ocean submarine", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.CITY, 123, BigDecimal.valueOf(120)));
-        legoSetService.addLegoSet(new CreateLegoSetCommand("75257", "Star Wars - Millenium", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.STAR_WARS, 1351, BigDecimal.valueOf(700)));
+        LegoSet legoSetFireBrigade = legoSetService.addLegoSet(new CreateLegoSetCommand("60215", "Fire brigade", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.DISNEY, 230, BigDecimal.valueOf(239), Set.of()));
+        LegoSet legoSetOceanSubmarine = legoSetService.addLegoSet(new CreateLegoSetCommand("60264", "Ocean submarine", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.CITY, 123, BigDecimal.valueOf(120), Set.of()));
+        LegoSet legoSetStarWars = legoSetService.addLegoSet(new CreateLegoSetCommand("75257", "Star Wars - Millenium", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.STAR_WARS, 1351, BigDecimal.valueOf(700), Set.of()));
+
+
+        User user1 = userService.addUser(new UserUseCase.CreateUserCommand("user123",Set.of(legoSetFireBrigade.getId(), legoSetOceanSubmarine.getId())));
+        User user2 = userService.addUser(new UserUseCase.CreateUserCommand("user1321", Set.of(legoSetStarWars.getId())));
+        User user3 = userService.addUser(new UserUseCase.CreateUserCommand("user987", Set.of(legoSetFireBrigade.getId(), legoSetStarWars.getId())));
+        User user4 = userService.addUser(new UserUseCase.CreateUserCommand("user1222", Set.of()));
+
+
     }
 
     private void printAllLegoSet() {
@@ -74,10 +82,4 @@ public class ApplicationStartup implements CommandLineRunner {
         legoSetService.changeStatusToPurchased(id);
     }
 
-    private void initSomeUsers() {
-        userService.addUser(new UserUseCase.CreateUserCommand("user123"));
-        userService.addUser(new UserUseCase.CreateUserCommand("user1321"));
-        userService.addUser(new UserUseCase.CreateUserCommand("user987"));
-        userService.addUser(new UserUseCase.CreateUserCommand("user1222"));
-    }
 }
