@@ -7,14 +7,16 @@ Content-Type: application/json
 
 {
   "login": "marian123"
+
 }
 
 ###
-PATCH http://localhost:8080/users/1
+PATCH http://localhost:8080/users/4
 Content-Type: application/json
 
 {
-  "login": "newnameofuserwithid1"
+  "login": "newnameofuserwithid1",
+  "legoSets" : []
 }
 
 ###

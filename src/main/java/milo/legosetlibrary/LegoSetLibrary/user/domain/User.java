@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import milo.legosetlibrary.LegoSetLibrary.jpa.BaseEntity;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSet;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -22,11 +23,8 @@ import java.util.Set;
 @Table(name = "users")
 @ToString(exclude = "legoSets")
 @EntityListeners(AuditingEntityListener.class)
-public class User {
+public class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    private Long id;
     private String login;
 
     @CreatedDate

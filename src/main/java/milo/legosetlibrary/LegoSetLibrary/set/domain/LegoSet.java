@@ -2,6 +2,7 @@ package milo.legosetlibrary.LegoSetLibrary.set.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import milo.legosetlibrary.LegoSetLibrary.jpa.BaseEntity;
 import milo.legosetlibrary.LegoSetLibrary.user.domain.User;
 
 import javax.persistence.*;
@@ -15,11 +16,8 @@ import java.util.Set;
 @ToString(exclude = "users")
 @Entity
 @RequiredArgsConstructor
-public class LegoSet {
+public class LegoSet extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    private Long id;
     private String catalogNumber;
     private String title;
     @Enumerated(value = EnumType.STRING)

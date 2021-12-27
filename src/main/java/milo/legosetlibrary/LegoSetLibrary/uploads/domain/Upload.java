@@ -3,6 +3,7 @@ package milo.legosetlibrary.LegoSetLibrary.uploads.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
+import milo.legosetlibrary.LegoSetLibrary.jpa.BaseEntity;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -16,11 +17,8 @@ import java.time.LocalDateTime;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
-public class Upload {
+public class Upload extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    Long id;
     byte[] file;
     String contentType;
     String filename;
