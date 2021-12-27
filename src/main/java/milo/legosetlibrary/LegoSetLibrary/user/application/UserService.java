@@ -7,6 +7,7 @@ import milo.legosetlibrary.LegoSetLibrary.user.application.port.UserUseCase;
 import milo.legosetlibrary.LegoSetLibrary.user.db.UserJpaRepository;
 import milo.legosetlibrary.LegoSetLibrary.user.domain.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +38,7 @@ public class UserService implements UserUseCase {
     }
 
     @Override
+    @Transactional
     public UpdateUserResponse updateUser(UpdateUserCommand command) {
         return userRepository
                 .findById(command.getId())
@@ -58,6 +60,7 @@ public class UserService implements UserUseCase {
     }
 
     @Override
+    @Transactional
     public User addUser(CreateUserCommand command) {
         User user = toUser(command);
         return userRepository.save(user);

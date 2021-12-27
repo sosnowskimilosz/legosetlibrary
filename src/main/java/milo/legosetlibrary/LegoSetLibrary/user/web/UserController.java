@@ -39,7 +39,7 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Object> addUser(@Valid @RequestBody RestUserCommand command) {
         User user = userService.addUser(command.toCreateUserCommand());

@@ -30,7 +30,7 @@ public class User extends BaseEntity {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JsonIgnoreProperties("users")
     @JoinTable
     private Set<LegoSet> legoSets = new HashSet<>();

@@ -29,7 +29,7 @@ public class LegoSet extends BaseEntity {
     private BigDecimal price;
     private Long coverOfBoxId;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "legoSets")
+    @ManyToMany(mappedBy = "legoSets", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnoreProperties("legoSets")
     private Set<User> users = new HashSet<>();
 

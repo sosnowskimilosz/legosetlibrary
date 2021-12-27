@@ -12,6 +12,7 @@ import milo.legosetlibrary.LegoSetLibrary.uploads.domain.Upload;
 import milo.legosetlibrary.LegoSetLibrary.user.db.UserJpaRepository;
 import milo.legosetlibrary.LegoSetLibrary.user.domain.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -68,6 +69,7 @@ public class LegoSetService implements LegoSetUseCase {
     }
 
     @Override
+    @Transactional
     public LegoSet addLegoSet(CreateLegoSetCommand command) {
         LegoSet legoSet = toLegoSet(command);
         return legoSetRepository.save(legoSet);
@@ -124,6 +126,7 @@ public class LegoSetService implements LegoSetUseCase {
 
 
     @Override
+    @Transactional
     public UpdateLegoSetResponse updateLegoSet(UpdateLegoSetCommand command) {
         return legoSetRepository.findById(command.getId())
                 .map(legoSet -> {

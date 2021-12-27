@@ -27,7 +27,7 @@ import java.util.Set;
 
 import static milo.legosetlibrary.LegoSetLibrary.set.application.port.LegoSetUseCase.*;
 
-@RequestMapping("/legoset")
+@RequestMapping("/legosets")
 @RestController
 @AllArgsConstructor
 public class LegoSetController {

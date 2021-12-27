@@ -2,25 +2,25 @@
 GET http://localhost:8080/users
 
 ###
-PUT http://localhost:8080/users
+POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "login": "marian123"
-
+  "login": "marian123",
+  "legoSets": [2,3]
 }
 
 ###
-PATCH http://localhost:8080/users/4
+PATCH http://localhost:8080/users/6
 Content-Type: application/json
 
 {
   "login": "newnameofuserwithid1",
-  "legoSets" : []
+  "legoSets": [2,3]
 }
 
 ###
-DELETE http://localhost:8080/users/1
+DELETE http://localhost:8080/users/8
 
 ###
-GET http://localhost:8080/users/2
+GET http://localhost:8080/users/6

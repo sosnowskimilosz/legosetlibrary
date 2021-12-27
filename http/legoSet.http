@@ -1,0 +1,37 @@
+###
+GET http://localhost:8080/legosets
+
+###
+POST http://localhost:8080/legosets
+Content-Type: application/json
+
+{
+  "catalogNumber": "66666",
+  "title": "TEST",
+  "status": "ON_DREAM_LIST",
+  "purchasingDate": null,
+  "category": "STAR_WARS",
+  "numberOfPieces": 8888,
+  "price": 1000.00,
+  "coverOfBoxId": null,
+  "users": [4,5]
+}
+
+###
+GET http://localhost:8080/legosets/9
+
+###
+PATCH http://localhost:8080/legosets/8
+Content-Type: application/json
+
+{
+  "catalogNumber": "66777",
+  "title": "Updated_TEST",
+  "status": "PURCHASED",
+  "purchasingDate": null,
+  "category": "CITY",
+  "numberOfPieces": 8888,
+  "price": 1000.00,
+  "coverOfBoxId": null,
+  "users": [7,6]
+}
