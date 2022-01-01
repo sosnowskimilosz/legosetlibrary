@@ -51,13 +51,10 @@ public interface LegoSetUseCase {
     class CreateLegoSetCommand {
         String catalogNumber;
         String title;
-        LegoSetStatus status;
-        LocalDate purchasingDate;
         LegoCategory category;
         Integer numberOfPieces;
         BigDecimal price;
         Set<Long> users;
-
     }
 
     @Value
@@ -81,7 +78,6 @@ public interface LegoSetUseCase {
         Integer numberOfPieces;
         BigDecimal price;
         Set<Long> users;
-
 
     }
 }

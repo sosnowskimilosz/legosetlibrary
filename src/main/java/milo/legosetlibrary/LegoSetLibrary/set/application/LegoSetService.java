@@ -51,7 +51,7 @@ public class LegoSetService implements LegoSetUseCase {
     public List<LegoSet> findByStatus(LegoSetStatus status) {
         return legoSetRepository.findAll()
                 .stream()
-                .filter(legoSet -> legoSet.getStatus().equals(status))
+                .filter(legoSet -> legoSet.getStatus() == status)
                 .collect(Collectors.toList());
     }
 

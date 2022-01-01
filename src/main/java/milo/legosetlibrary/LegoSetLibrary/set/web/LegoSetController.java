@@ -134,7 +134,7 @@ public class LegoSetController {
         Set<Long> users = new HashSet<>();
 
         CreateLegoSetCommand toCreateCommand() {
-            return new CreateLegoSetCommand(catalogNumber, title, status, purchasingDate, category, numberOfPieces, price, users);
+            return new CreateLegoSetCommand(catalogNumber, title, category, numberOfPieces, price, users);
         }
 
         UpdateLegoSetCommand toUpdateCommand(Long id) {

@@ -25,6 +25,7 @@ import java.util.Set;
 @EntityListeners(AuditingEntityListener.class)
 public class User extends BaseEntity {
 
+    @Column(unique = true)
     private String login;
 
     @CreatedDate

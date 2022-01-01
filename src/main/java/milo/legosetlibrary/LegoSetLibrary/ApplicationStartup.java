@@ -33,9 +33,9 @@ public class ApplicationStartup implements CommandLineRunner {
     }
 
     private void initData() {
-        LegoSet legoSetFireBrigade = legoSetService.addLegoSet(new CreateLegoSetCommand("60215", "Fire brigade", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.DISNEY, 230, BigDecimal.valueOf(239), Set.of()));
-        LegoSet legoSetOceanSubmarine = legoSetService.addLegoSet(new CreateLegoSetCommand("60264", "Ocean submarine", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.CITY, 123, BigDecimal.valueOf(120), Set.of()));
-        LegoSet legoSetStarWars = legoSetService.addLegoSet(new CreateLegoSetCommand("75257", "Star Wars - Millenium", LegoSetStatus.ON_DREAM_LIST, null, LegoCategory.STAR_WARS, 1351, BigDecimal.valueOf(700), Set.of()));
+        LegoSet legoSetFireBrigade = legoSetService.addLegoSet(new CreateLegoSetCommand("60215", "Fire brigade", LegoCategory.DISNEY, 230, BigDecimal.valueOf(239), Set.of()));
+        LegoSet legoSetOceanSubmarine = legoSetService.addLegoSet(new CreateLegoSetCommand("60264", "Ocean submarine", LegoCategory.CITY, 123, BigDecimal.valueOf(120), Set.of()));
+        LegoSet legoSetStarWars = legoSetService.addLegoSet(new CreateLegoSetCommand("75257", "Star Wars - Millenium", LegoCategory.STAR_WARS, 1351, BigDecimal.valueOf(700), Set.of()));
 
         User user1 = userService.addUser(new UserUseCase.CreateUserCommand("user123", Set.of(legoSetFireBrigade.getId(), legoSetOceanSubmarine.getId())));
         User user2 = userService.addUser(new UserUseCase.CreateUserCommand("user1321", Set.of(legoSetStarWars.getId())));
