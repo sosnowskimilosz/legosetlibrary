@@ -22,6 +22,7 @@ public class UploadController {
 
     private final UploadUseCase upload;
 
+    //admin
     @GetMapping("/{id}")
     public ResponseEntity<UploadResponse> getUpload(@PathVariable Long id) {
         return upload.getById(id)
@@ -36,6 +37,7 @@ public class UploadController {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
+    //legouser
     @GetMapping("/{id}/file")
     public ResponseEntity<Resource> getUploadFile(@PathVariable Long id) {
         return upload.getById(id)

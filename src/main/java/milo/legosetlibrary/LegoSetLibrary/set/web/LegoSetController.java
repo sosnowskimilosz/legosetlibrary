@@ -11,6 +11,7 @@ import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSetStatus;
 import milo.legosetlibrary.LegoSetLibrary.web.CreatedURI;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -66,6 +67,7 @@ public class LegoSetController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @Secured({"ROLE_ADMIN"})
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> addLegoSet(@Valid @RequestBody RestLegoSetCommand command) {
@@ -77,12 +79,14 @@ public class LegoSetController {
         return new CreatedURI("/" + legoSet.getId().toString()).uri();
     }
 
+    @Secured({"ROLE_ADMIN"})
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteLegoSetById(@PathVariable Long id) {
         service.removeById(id);
     }
 
+    @Secured({"ROLE_ADMIN"})
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateLegoSet(@PathVariable Long id, @RequestBody RestLegoSetCommand command) {
@@ -93,6 +97,7 @@ public class LegoSetController {
         }
     }
 
+    @Secured({"ROLE_ADMIN"})
     @PutMapping("/{id}/cover")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void addBoxCover(@PathVariable Long id, @RequestParam("file") MultipartFile file) throws IOException {
@@ -104,7 +109,7 @@ public class LegoSetController {
                 file.getOriginalFilename()
         ));
     }
-
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @PatchMapping("/{id}/makepurchased")
     public ResponseEntity<LegoSet> makePurchased(@PathVariable Long id) {
         UpdateLegoSetResponse response = service.changeStatusToPurchased(id);

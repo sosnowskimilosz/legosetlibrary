@@ -65,6 +65,7 @@ public class LegoSetService implements LegoSetUseCase {
 
     @Override
     public void removeById(Long id) {
+        legoSetRepository.findById(id).ifPresent(LegoSet::removeUsers);
         legoSetRepository.deleteById(id);
     }
 
