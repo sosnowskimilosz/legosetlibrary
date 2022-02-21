@@ -8,6 +8,7 @@ import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoCategory;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSet;
 import milo.legosetlibrary.LegoSetLibrary.set.domain.LegoSetStatus;
 import milo.legosetlibrary.LegoSetLibrary.uploads.application.UploadService;
+import milo.legosetlibrary.LegoSetLibrary.user.domain.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -110,6 +111,25 @@ class LegoSetServiceTest {
         assertEquals(999, legoSetCity.getNumberOfPieces());
     }
 
+    @Test
+    public void legoSetShouldHaveTwoUsersAndThoseUserShouldContainsLegoSet(){
+        //given
+        CreateLegoSetCommand createLegoSetCommand = givenLegoSetCityCreateCommand();
+        User userNo1 = givenUserNo1();
+        User userNo2 = givenUserNo2();
+
+        //when
+        LegoSet legoSet = legoSetService.addLegoSet(createLegoSetCommand);
+        legoSetService.updateLegoSets(legoSet,Set.of(userNo1,userNo2));
+
+        //then
+        assertEquals(2, legoSet.getUsers().size());
+        assertTrue(legoSet.getUsers().contains(userNo1));
+        assertTrue(legoSet.getUsers().contains(userNo2));
+        assertTrue(userNo1.getLegoSets().contains(legoSet));
+        assertTrue(userNo2.getLegoSets().contains(legoSet));
+    }
+
     private CreateLegoSetCommand givenLegoSetCityCreateCommand() {
         return new CreateLegoSetCommand(
                 "61655",
@@ -149,5 +169,13 @@ class LegoSetServiceTest {
                 .catalogNumber("654321")
                 .numberOfPieces(999)
                 .build();
+    }
+
+    private User givenUserNo1() {
+        return new User("marian123");
+    }
+
+    private User givenUserNo2() {
+        return new User("milosz321");
     }
 }

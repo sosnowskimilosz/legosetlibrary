@@ -9,11 +9,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,7 +43,6 @@ class LegoSetControllerTest {
         assertEquals(2, allLegoSet.size());
     }
 
-
     private LegoSet givenLegoSetCity() {
         LegoSet legoSet = new LegoSet("61655",
                 "set for test from Lego City",
@@ -58,13 +59,5 @@ class LegoSetControllerTest {
                 500,
                 new BigDecimal("50.00"));
         return legoSet;
-    }
-
-    private User givenUserNo1() {
-        return new User("marian123");
-    }
-
-    private User givenUserNo2() {
-        return new User("milosz321");
     }
 }

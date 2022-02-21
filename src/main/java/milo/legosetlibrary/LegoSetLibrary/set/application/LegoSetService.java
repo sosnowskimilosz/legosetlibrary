@@ -82,7 +82,7 @@ public class LegoSetService implements LegoSetUseCase {
         return legoSet;
     }
 
-    private void updateLegoSets(LegoSet legoSet, Set<User> users) {
+    public void updateLegoSets(LegoSet legoSet, Set<User> users) {
         legoSet.removeUsers();
         users.forEach(user -> legoSet.addUser(user));
     }
